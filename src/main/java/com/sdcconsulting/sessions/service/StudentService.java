@@ -6,13 +6,18 @@ import com.sdcconsulting.sessions.model.entity.StudentMapper;
 import com.sdcconsulting.sessions.repository.StudentRepository;
 import com.sdcconsulting.sessions.service.exception.StudentNotFoundException;
 import jakarta.transaction.Transactional;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import static com.sdcconsulting.sessions.config.CacheConfig.CACHE_SISA_IDS;
 import static com.sdcconsulting.sessions.model.entity.StudentMapper.toDomain;
 import static com.sdcconsulting.sessions.model.entity.StudentMapper.toEntity;
 
+@Slf4j
 @Service
 public class StudentService {
 
@@ -54,6 +59,7 @@ public class StudentService {
         studentRepository.save(studentEntity);
     }
 
+    @CacheEvict(value = CACHE_SISA_IDS, key = "#id")
     public void updateStudent(final long id, final Student student) {
         final boolean studentExists = studentRepository.existsById(id);
         if (!studentExists) {
@@ -75,6 +81,16 @@ public class StudentService {
     @Transactional
     public void deleteAllStudents() {
         studentRepository.softDeleteAll();
+    }
+
+    @Cacheable(value = CACHE_SISA_IDS, key = "#studentId")
+    public String fetchSisaId(final long studentId) {
+        try {
+            Thread.sleep(3000);
+            return "SISA-STUDENT-%s".formatted(studentId);
+        } catch (Exception e) {
+            throw new RuntimeException();
+        }
     }
 
 }

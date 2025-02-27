@@ -105,4 +105,12 @@ public class StudentController {
         return ResponseEntity.noContent().build();
     }
 
+    @PostMapping("/{student_id}/sisa/fetch_id")
+    public ResponseEntity<String> fetchSisaId(
+            @PathVariable(name = "student_id") final long studentId
+    ) {
+        final String sisaId = studentService.fetchSisaId(studentId);
+        return ResponseEntity.ok(sisaId);
+    }
+
 }
