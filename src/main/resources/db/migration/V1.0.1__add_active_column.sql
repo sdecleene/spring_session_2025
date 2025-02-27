@@ -1,0 +1,2 @@
+ALTER TABLE student
+    ADD `active` BOOLEAN NOT NULL DEFAULT TRUE;
