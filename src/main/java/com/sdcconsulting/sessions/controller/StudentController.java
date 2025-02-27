@@ -2,6 +2,11 @@ package com.sdcconsulting.sessions.controller;
 
 import com.sdcconsulting.sessions.model.Student;
 import com.sdcconsulting.sessions.service.StudentService;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.web.PageableDefault;
+import org.springframework.data.web.SortDefault;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -13,8 +18,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-
-import java.util.List;
 
 import static com.sdcconsulting.sessions.util.StudentGenerator.generateStudent;
 
@@ -37,17 +40,18 @@ public class StudentController {
     }
 
     @GetMapping
-    public ResponseEntity<List<Student>> getStudents(
+    public ResponseEntity<Page<Student>> getStudents(
+            @PageableDefault(value = 20, page = 0) @SortDefault(sort = "name.firstName", direction = Sort.Direction.ASC) Pageable pageable,
             @RequestParam(name = "city_zip", required = false) final String cityZip,
             @RequestParam(name = "year_of_birth", required = false) final Integer yearOfBirth
     ) {
-        final List<Student> students;
+        final Page<Student> students;
         if (cityZip != null) {
-            students = studentService.getStudentsWithAddressInCity(cityZip);
+            students = studentService.getStudentsWithAddressInCity(cityZip, pageable);
         } else if (yearOfBirth != null) {
-            students = studentService.getStudentsBornInYear(yearOfBirth);
+            students = studentService.getStudentsBornInYear(yearOfBirth, pageable);
         } else {
-            students = studentService.getAllStudents();
+            students = studentService.getAllStudents(pageable);
         }
         return ResponseEntity.ok(students);
     }

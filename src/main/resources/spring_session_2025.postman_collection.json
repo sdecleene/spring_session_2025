@@ -73,6 +73,21 @@
               "key": "year_of_birth",
               "value": "1997",
               "disabled": true
+            },
+            {
+              "key": "page",
+              "value": "1",
+              "disabled": true
+            },
+            {
+              "key": "size",
+              "value": "3",
+              "disabled": true
+            },
+            {
+              "key": "sort",
+              "value": "dateOfBirth,desc",
+              "disabled": true
             }
           ]
         }

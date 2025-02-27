@@ -3,6 +3,8 @@ package com.sdcconsulting.sessions.service;
 import com.sdcconsulting.sessions.model.Student;
 import com.sdcconsulting.sessions.repository.StudentRepository;
 import com.sdcconsulting.sessions.service.exception.StudentNotFoundException;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -21,16 +23,22 @@ public class StudentService {
                 .orElseThrow(() -> new StudentNotFoundException(id));
     }
 
-    public List<Student> getStudentsWithAddressInCity(final String zipCode) {
-        return studentRepository.findAllByAddressesZip(zipCode);
+    public Page<Student> getStudentsWithAddressInCity(
+            final String zipCode,
+            final Pageable pageable
+    ) {
+        return studentRepository.findAllByAddressesZip(zipCode, pageable);
     }
 
-    public List<Student> getStudentsBornInYear(final int year) {
-        return studentRepository.findAllBornInYear(year);
+    public Page<Student> getStudentsBornInYear(
+            final int year,
+            final Pageable pageable
+    ) {
+        return studentRepository.findAllBornInYear(year, pageable);
     }
 
-    public List<Student> getAllStudents() {
-        return studentRepository.findAll();
+    public Page<Student> getAllStudents(Pageable pageable) {
+        return studentRepository.findAll(pageable);
     }
 
     public void addStudent(final Student student) {
@@ -42,6 +50,10 @@ public class StudentService {
     }
 
     public void updateStudent(final long id, final Student student) {
+        final boolean studentExists = studentRepository.existsById(id);
+        if (!studentExists) {
+            throw new StudentNotFoundException(id);
+        }
         student.setId(id);
         studentRepository.save(student);
     }

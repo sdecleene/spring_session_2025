@@ -1,23 +1,28 @@
 package com.sdcconsulting.sessions.repository;
 
 import com.sdcconsulting.sessions.model.Student;
-import jakarta.annotation.Nonnull;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
+import org.springframework.data.repository.PagingAndSortingRepository;
 import org.springframework.stereotype.Repository;
 
-import java.util.List;
-
 @Repository
-public interface StudentRepository extends CrudRepository<Student, Long> {
+public interface StudentRepository extends PagingAndSortingRepository<Student, Long>, CrudRepository<Student, Long> {
 
-    @Nonnull
-    @Override
-    List<Student> findAll();
+    /*
+        Note how, now that we extend the PagingAndSortingRepository, we have a base method that returns a Page.
+        So the previous override that had for the findAll can be removed.
+     */
 
-    List<Student> findAllByAddressesZip(String zip);
+    /*
+        To get a page from our repository methods, we will need to pass a pageable to the method.
+     */
+
+    Page<Student> findAllByAddressesZip(String zip, Pageable pageable);
 
     @Query("SELECT s from Student s WHERE year(s.dateOfBirth) = :year")
-    List<Student> findAllBornInYear(final int year);
+    Page<Student> findAllBornInYear(final int year, Pageable pageable);
 
 }
