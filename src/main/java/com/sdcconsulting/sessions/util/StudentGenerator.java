@@ -32,6 +32,7 @@ public class StudentGenerator {
                                 .zip(FAKE_DATA_GENERATOR.address().zipCode())
                                 .build()
                 ))
+                .active(true)
                 .build();
         /*
             Do note what we did here. Since in the database we have a one-to many relationship, and the address

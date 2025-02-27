@@ -1,5 +1,6 @@
 package com.sdcconsulting.sessions.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.sdcconsulting.sessions.model.validation.ValidDateOfBirth;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Embedded;
@@ -42,6 +43,13 @@ public class Student {
 
     @ValidDateOfBirth
     private LocalDate dateOfBirth;
+
+    /*
+        Note that we need to ignore this field during JSON (de)serialization, otherwise the client could un-delete students.
+         A proper fix for this issue comes in the next branch.
+     */
+    @JsonIgnore
+    private boolean active = true;
 
     @NotEmpty
     @OneToMany(

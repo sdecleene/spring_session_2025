@@ -4,6 +4,7 @@ CREATE TABLE student
     `first_name`    VARCHAR(128) NOT NULL,
     `last_name`     VARCHAR(128) NOT NULL,
     `date_of_birth` DATE         NOT NULL,
+    `active` BOOLEAN NOT NULL DEFAULT TRUE,
     PRIMARY KEY (`id`)
 );
 
