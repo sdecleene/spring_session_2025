@@ -1,6 +1,6 @@
 {
   "info": {
-    "_postman_id": "99a26b62-ffa4-4e23-a758-ecfce09c20c3",
+    "_postman_id": "b52245b4-f935-4421-9e62-8817305a069c",
     "name": "spring_session_2025",
     "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
     "_exporter_id": "2429872"
@@ -135,6 +135,36 @@
             "api",
             "student",
             "generate"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Sync Student",
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{host}}/api/student/1/sisa/sync",
+          "host": [
+            "{{host}}"
+          ],
+          "path": [
+            "api",
+            "student",
+            "1",
+            "sisa",
+            "sync"
           ]
         }
       },
