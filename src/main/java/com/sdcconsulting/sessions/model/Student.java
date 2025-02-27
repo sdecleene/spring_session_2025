@@ -1,5 +1,6 @@
 package com.sdcconsulting.sessions.model;
 
+import com.sdcconsulting.sessions.model.validation.ValidDateOfBirth;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Embedded;
 import jakarta.persistence.Entity;
@@ -34,6 +35,7 @@ public class Student {
     @Embedded
     private Name name;
 
+    @ValidDateOfBirth
     private LocalDate dateOfBirth;
 
     @OneToMany(
