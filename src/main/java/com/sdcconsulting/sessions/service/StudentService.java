@@ -2,7 +2,7 @@ package com.sdcconsulting.sessions.service;
 
 import com.sdcconsulting.sessions.model.Student;
 import com.sdcconsulting.sessions.model.entity.StudentEntity;
-import com.sdcconsulting.sessions.model.entity.StudentMapper;
+import com.sdcconsulting.sessions.model.entity.StudentEntityMapper;
 import com.sdcconsulting.sessions.repository.StudentRepository;
 import com.sdcconsulting.sessions.service.exception.StudentNotFoundException;
 import jakarta.transaction.Transactional;
@@ -14,23 +14,26 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import static com.sdcconsulting.sessions.config.CacheConfig.CACHE_SISA_IDS;
-import static com.sdcconsulting.sessions.model.entity.StudentMapper.toDomain;
-import static com.sdcconsulting.sessions.model.entity.StudentMapper.toEntity;
 
 @Slf4j
 @Service
 public class StudentService {
 
     private final StudentRepository studentRepository;
+    private final StudentEntityMapper studentEntityMapper;
 
-    public StudentService(StudentRepository studentRepository) {
+    public StudentService(
+            StudentRepository studentRepository,
+            StudentEntityMapper studentEntityMapper
+    ) {
         this.studentRepository = studentRepository;
+        this.studentEntityMapper = studentEntityMapper;
     }
 
     public Student getStudent(final long id) {
         final StudentEntity studentEntity = studentRepository.findById(id)
                 .orElseThrow(() -> new StudentNotFoundException(id));
-        return toDomain(studentEntity);
+        return studentEntityMapper.toDomain(studentEntity);
     }
 
     public Page<Student> getStudentsWithAddressInCity(
@@ -38,7 +41,7 @@ public class StudentService {
             final Pageable pageable
     ) {
         final Page<StudentEntity> studentEntity = studentRepository.findAllByAddressesZipAndActiveTrue(zipCode, pageable);
-        return studentEntity.map(StudentMapper::toDomain);
+        return studentEntity.map(studentEntityMapper::toDomain);
     }
 
     public Page<Student> getStudentsBornInYear(
@@ -46,16 +49,16 @@ public class StudentService {
             final Pageable pageable
     ) {
         final Page<StudentEntity> studentEntity = studentRepository.findAllBornInYearAndActiveTrue(year, pageable);
-        return studentEntity.map(StudentMapper::toDomain);
+        return studentEntity.map(studentEntityMapper::toDomain);
     }
 
     public Page<Student> getAllStudents(Pageable pageable) {
         final Page<StudentEntity> studentEntities = studentRepository.findAllByActiveTrue(pageable);
-        return studentEntities.map(StudentMapper::toDomain);
+        return studentEntities.map(studentEntityMapper::toDomain);
     }
 
     public void addStudent(final Student student) {
-        final StudentEntity studentEntity = toEntity(student);
+        final StudentEntity studentEntity = studentEntityMapper.toEntity(student);
         studentRepository.save(studentEntity);
     }
 
@@ -65,7 +68,7 @@ public class StudentService {
         if (!studentExists) {
             throw new StudentNotFoundException(id);
         }
-        final StudentEntity studentEntity = toEntity(student);
+        final StudentEntity studentEntity = studentEntityMapper.toEntity(student);
         studentEntity.setId(id);
         studentRepository.save(studentEntity);
     }

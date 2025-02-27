@@ -1,8 +1,8 @@
 package com.sdcconsulting.sessions.controller;
 
 import com.sdcconsulting.sessions.model.Student;
-import com.sdcconsulting.sessions.model.view.StudentMapper;
 import com.sdcconsulting.sessions.model.view.StudentView;
+import com.sdcconsulting.sessions.model.view.StudentViewMapper;
 import com.sdcconsulting.sessions.service.StudentService;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -21,8 +21,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import static com.sdcconsulting.sessions.model.view.StudentMapper.toDomain;
-import static com.sdcconsulting.sessions.model.view.StudentMapper.toView;
 import static com.sdcconsulting.sessions.util.StudentGenerator.generateStudent;
 
 @RestController
@@ -30,9 +28,14 @@ import static com.sdcconsulting.sessions.util.StudentGenerator.generateStudent;
 public class StudentController {
 
     private final StudentService studentService;
+    private final StudentViewMapper studentViewMapper;
 
-    public StudentController(StudentService studentService) {
+    public StudentController(
+            StudentService studentService,
+            StudentViewMapper studentViewMapper
+    ) {
         this.studentService = studentService;
+        this.studentViewMapper = studentViewMapper;
     }
 
     @GetMapping("/{student_id}")
@@ -40,7 +43,7 @@ public class StudentController {
             @PathVariable(name = "student_id") final long studentId
     ) {
         final Student student = studentService.getStudent(studentId);
-        final StudentView studentView = toView(student);
+        final StudentView studentView = studentViewMapper.toView(student);
         return ResponseEntity.ok(studentView);
     }
 
@@ -58,7 +61,7 @@ public class StudentController {
         } else {
             students = studentService.getAllStudents(pageable);
         }
-        final Page<StudentView> studentViews = students.map(StudentMapper::toView);
+        final Page<StudentView> studentViews = students.map(studentViewMapper::toView);
         return ResponseEntity.ok(studentViews);
     }
 
@@ -69,7 +72,7 @@ public class StudentController {
              */
             @Validated @RequestBody final StudentView studentView
     ) {
-        final Student student = toDomain(studentView);
+        final Student student = studentViewMapper.toDomain(studentView);
         studentService.addStudent(student);
         return ResponseEntity.accepted().build();
     }
@@ -86,7 +89,7 @@ public class StudentController {
             @PathVariable(name = "student_id") final long studentId,
             @Validated @RequestBody final StudentView studentView
     ) {
-        final Student student = toDomain(studentView);
+        final Student student = studentViewMapper.toDomain(studentView);
         studentService.updateStudent(studentId, student);
         return ResponseEntity.accepted().build();
     }
