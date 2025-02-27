@@ -1,26 +1,11 @@
 spring:
   application:
     name: spring-2025
-  datasource:
-    driver-class-name: org.h2.Driver
-    url: "jdbc:h2:mem:tutorial-db"
-    username: sa
-    password: admin
-  jpa:
-    database-platform: org.hibernate.dialect.H2Dialect
-    generate-ddl: false
-  h2:
-    console:
-      # We can visit the h2 console by visiting the url: http://localhost:8081/api/h2-console
-      # The information to login can be found at the top of this file.
-      enabled: true
+  profiles:
+    # This property is necessary to wire the default profile into the application
+    active: @spring.profiles.active@
 server:
   port: 8081
   servlet:
     # The context path is appended to the start of your path. With this, the path becomes "/api/..." rather than "/..."
     context-path: /api
-  error:
-    # In the absence of an exception handler, Spring will add details to the HTTP response according to these fields.
-    include-exception: true
-    include-message: always
-    include-stacktrace: always

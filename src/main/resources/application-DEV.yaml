@@ -1,0 +1,20 @@
+spring:
+  datasource:
+    driver-class-name: org.h2.Driver
+    url: "jdbc:h2:mem:tutorial-db"
+    username: sa
+    password: admin
+  jpa:
+    database-platform: org.hibernate.dialect.H2Dialect
+    generate-ddl: false
+  h2:
+    console:
+      # We can visit the h2 console by visiting the url: http://localhost:8081/api/h2-console
+      # The information to login can be found at the top of this file.
+      enabled: true
+server:
+  error:
+    # In the absence of an exception handler, Spring will add details to the HTTP response according to these fields.
+    include-exception: true
+    include-message: always
+    include-stacktrace: always
