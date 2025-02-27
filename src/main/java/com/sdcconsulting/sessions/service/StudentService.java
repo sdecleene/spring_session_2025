@@ -2,6 +2,7 @@ package com.sdcconsulting.sessions.service;
 
 import com.sdcconsulting.sessions.model.Student;
 import com.sdcconsulting.sessions.repository.StudentRepository;
+import com.sdcconsulting.sessions.service.exception.StudentNotFoundException;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -17,7 +18,7 @@ public class StudentService {
 
     public Student getStudent(final long id) {
         return studentRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("There exists not student with id " + id + "!"));
+                .orElseThrow(() -> new StudentNotFoundException(id));
     }
 
     public List<Student> getStudentsWithAddressInCity(final String zipCode) {

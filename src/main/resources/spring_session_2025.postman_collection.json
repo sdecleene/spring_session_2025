@@ -1,0 +1,212 @@
+{
+  "info": {
+    "_postman_id": "99a26b62-ffa4-4e23-a758-ecfce09c20c3",
+    "name": "spring_session_2025",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "2429872"
+  },
+  "item": [
+    {
+      "name": "Get Student By Id",
+      "protocolProfileBehavior": {
+        "disableBodyPruning": true
+      },
+      "request": {
+        "method": "GET",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n    \"name\": {\r\n        \"firstName\": \"Henk\",\r\n        \"lastName\": \"De Backer\"\r\n    },\r\n    \"dateOfBirth\": \"1997-11-19\",\r\n    \"addresses\": [\r\n        {\r\n            \"addressType\": \"DOMICILE\",\r\n            \"street\": \"Pierre Delannoyplaats\",\r\n            \"number\": \"338\",\r\n            \"city\": \"Hainaut\",\r\n            \"zip\": \"7743\"\r\n        },\r\n        {\r\n            \"addressType\": \"DOMICILE\",\r\n            \"street\": \"Ramselsesteenweg\",\r\n            \"number\": \"105\",\r\n            \"box\": \"5A\",\r\n            \"city\": \"Lillois-witterzée\",\r\n            \"zip\": \"1428\"\r\n        }\r\n    ]\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{host}}/api/student/1",
+          "host": [
+            "{{host}}"
+          ],
+          "path": [
+            "api",
+            "student",
+            "1"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Get Students",
+      "protocolProfileBehavior": {
+        "disableBodyPruning": true
+      },
+      "request": {
+        "method": "GET",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n    \"name\": {\r\n        \"firstName\": \"Henk\",\r\n        \"lastName\": \"De Backer\"\r\n    },\r\n    \"dateOfBirth\": \"1997-11-19\",\r\n    \"addresses\": [\r\n        {\r\n            \"addressType\": \"DOMICILE\",\r\n            \"street\": \"Pierre Delannoyplaats\",\r\n            \"number\": \"338\",\r\n            \"city\": \"Hainaut\",\r\n            \"zip\": \"7743\"\r\n        },\r\n        {\r\n            \"addressType\": \"DOMICILE\",\r\n            \"street\": \"Ramselsesteenweg\",\r\n            \"number\": \"105\",\r\n            \"box\": \"5A\",\r\n            \"city\": \"Lillois-witterzée\",\r\n            \"zip\": \"1428\"\r\n        }\r\n    ]\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{host}}/api/student",
+          "host": [
+            "{{host}}"
+          ],
+          "path": [
+            "api",
+            "student"
+          ],
+          "query": [
+            {
+              "key": "city_zip",
+              "value": "7743",
+              "disabled": true
+            },
+            {
+              "key": "year_of_birth",
+              "value": "1997",
+              "disabled": true
+            }
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Add Student",
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n    \"name\": {\r\n        \"firstName\": \"Henk\",\r\n        \"lastName\": \"De Backer\"\r\n    },\r\n    \"dateOfBirth\": \"1997-11-19\",\r\n    \"addresses\": [\r\n        {\r\n            \"addressType\": \"DOMICILE\",\r\n            \"street\": \"Pierre Delannoyplaats\",\r\n            \"number\": \"338\",\r\n            \"city\": \"Hainaut\",\r\n            \"zip\": \"7743\"\r\n        },\r\n        {\r\n            \"addressType\": \"DOMICILE\",\r\n            \"street\": \"Ramselsesteenweg\",\r\n            \"number\": \"105\",\r\n            \"box\": \"5A\",\r\n            \"city\": \"Lillois-witterzée\",\r\n            \"zip\": \"1428\"\r\n        }\r\n    ]\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{host}}/api/student",
+          "host": [
+            "{{host}}"
+          ],
+          "path": [
+            "api",
+            "student"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Add Generated Student",
+      "request": {
+        "method": "POST",
+        "header": [],
+        "url": {
+          "raw": "{{host}}/api/student/generate",
+          "host": [
+            "{{host}}"
+          ],
+          "path": [
+            "api",
+            "student",
+            "generate"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Update Student",
+      "request": {
+        "method": "PUT",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n    \"name\": {\r\n        \"firstName\": \"Henkie\",\r\n        \"lastName\": \"De Backer\"\r\n    },\r\n    \"dateOfBirth\": \"1997-11-19\",\r\n    \"addresses\": [\r\n        {\r\n            \"addressType\": \"DOMICILE\",\r\n            \"street\": \"Pierre Delannoyplaats\",\r\n            \"number\": \"338\",\r\n            \"city\": \"Hainaut\",\r\n            \"zip\": \"7743\"\r\n        },\r\n        {\r\n            \"addressType\": \"DOMICILE\",\r\n            \"street\": \"Ramselsesteenweg\",\r\n            \"number\": \"105\",\r\n            \"box\": \"5A\",\r\n            \"city\": \"Lillois-witterzée\",\r\n            \"zip\": \"1428\"\r\n        }\r\n    ]\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{host}}/api/student/1",
+          "host": [
+            "{{host}}"
+          ],
+          "path": [
+            "api",
+            "student",
+            "1"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Delete Student",
+      "request": {
+        "method": "DELETE",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n    \"name\": {\r\n        \"firstName\": \"Henkie\",\r\n        \"lastName\": \"De Backer\"\r\n    },\r\n    \"dateOfBirth\": \"1997-11-19\",\r\n    \"addresses\": [\r\n        {\r\n            \"addressType\": \"DOMICILE\",\r\n            \"street\": \"Pierre Delannoyplaats\",\r\n            \"number\": \"338\",\r\n            \"city\": \"Hainaut\",\r\n            \"zip\": \"7743\"\r\n        },\r\n        {\r\n            \"addressType\": \"DOMICILE\",\r\n            \"street\": \"Ramselsesteenweg\",\r\n            \"number\": \"105\",\r\n            \"box\": \"5A\",\r\n            \"city\": \"Lillois-witterzée\",\r\n            \"zip\": \"1428\"\r\n        }\r\n    ]\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{host}}/api/student/1",
+          "host": [
+            "{{host}}"
+          ],
+          "path": [
+            "api",
+            "student",
+            "1"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Delete All Students",
+      "request": {
+        "method": "DELETE",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n    \"name\": {\r\n        \"firstName\": \"Henkie\",\r\n        \"lastName\": \"De Backer\"\r\n    },\r\n    \"dateOfBirth\": \"1997-11-19\",\r\n    \"addresses\": [\r\n        {\r\n            \"addressType\": \"DOMICILE\",\r\n            \"street\": \"Pierre Delannoyplaats\",\r\n            \"number\": \"338\",\r\n            \"city\": \"Hainaut\",\r\n            \"zip\": \"7743\"\r\n        },\r\n        {\r\n            \"addressType\": \"DOMICILE\",\r\n            \"street\": \"Ramselsesteenweg\",\r\n            \"number\": \"105\",\r\n            \"box\": \"5A\",\r\n            \"city\": \"Lillois-witterzée\",\r\n            \"zip\": \"1428\"\r\n        }\r\n    ]\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{host}}/api/student",
+          "host": [
+            "{{host}}"
+          ],
+          "path": [
+            "api",
+            "student"
+          ]
+        }
+      },
+      "response": []
+    }
+  ]
+}

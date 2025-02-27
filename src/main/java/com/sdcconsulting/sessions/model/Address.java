@@ -1,5 +1,6 @@
 package com.sdcconsulting.sessions.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
@@ -45,6 +46,7 @@ public class Address {
     private String zip;
 
     @ManyToOne
+    @JsonIgnore
     @JoinColumn(name = "student_id")
     private Student student;
 
