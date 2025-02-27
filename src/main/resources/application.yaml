@@ -1,6 +1,8 @@
 spring:
   application:
     name: spring-2025
+  cache:
+    sisaIds: 3600000
   profiles:
     # This property is necessary to wire the default profile into the application
     active: @spring.profiles.active@
