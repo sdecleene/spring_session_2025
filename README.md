@@ -13,11 +13,11 @@ The final state can be observed on the main branch.
 - 02: Spring data
 - 03: Spring web
 - 04: Validation
-- 04: Exception handling
-- 05: Profiles
-- 06: Paging and sorting
-- 07: Soft deletes
-- 08: DTOs
-- 08: Caching
-- 09: Database migration
-- 10: Mapstruct
+- 05: Exception handling
+- 06: Profiles
+- 07: Paging and sorting
+- 08: Soft deletes
+- 09: DTOs
+- 10: Caching
+- 11: Database migration
+- 12: Mapstruct
